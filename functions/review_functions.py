@@ -8,7 +8,7 @@ def import_Zhou(
     ShineDelgarno_toll = 3,
     seq_length_toll = 3,
 ):
-    filename = "review_datasets/Data_for_Srdjan.xlsx"
+    filename = "datasets_dir/review_datasets/Data_for_Srdjan.xlsx"
     isheet = 4
     print(f"importing sheet no.{isheet} from {filename}")
     data = pd.read_excel(filename, sheet_name=isheet)
@@ -67,7 +67,7 @@ def import_Zhou(
 
 def import_Hossain():
     # shinedelgarno = "aggag"
-    data = pd.read_excel("review_datasets/Data_for_Srdjan.xlsx", sheet_name=0)
+    data = pd.read_excel("datasets_dir/review_datasets/Data_for_Srdjan.xlsx", sheet_name=0)
     data.columns = [c.lower() for c in data.columns]
     # data["promoter sequence"].apply(lambda xi: xi.find(shinedalgarno)).value_counts()
     # So, no Shine-Delgarno anywhere.
@@ -103,13 +103,13 @@ def import_Hossain():
 
 def import_Utrecho():
     
-    print ("Importing sheet 3 from review_datasets/Data_for_Srdjan.xlsx. That's where the sequence are.")
-    dataseq = pd.read_excel("review_datasets/Data_for_Srdjan.xlsx", sheet_name=3)
+    print ("Importing sheet 3 from datasets_dir/review_datasets/Data_for_Srdjan.xlsx. That's where the sequence are.")
+    dataseq = pd.read_excel("datasets_dir/review_datasets/Data_for_Srdjan.xlsx", sheet_name=3)
     print ("Dropping duplicates.")
     dataseq = dataseq.drop_duplicates()
 
-    print ("Importing expressions from review_datasets/GSE108535_sigma70_variant_data.txt")
-    dataexp = pd.read_csv("review_datasets/GSE108535_sigma70_variant_data.txt", sep=" ")
+    print ("Importing expressions from datasets_dir/review_datasets/GSE108535_sigma70_variant_data.txt")
+    dataexp = pd.read_csv("datasets_dir/review_datasets/GSE108535_sigma70_variant_data.txt", sep=" ")
     dataexp.name = [name.replace("_","-") for name in dataexp.name]
     print ("Merging the two.")
     data = dataexp.merge(dataseq, on="name")
@@ -127,8 +127,8 @@ def import_Utrecho():
 
 def import_Johns():
     
-    print ("Importing sheet 1 from review_datasets/Data_for_Srdjan.xlsx.")
-    data = pd.read_excel("review_datasets/Data_for_Srdjan.xlsx", sheet_name=1)
+    print ("Importing sheet 1 from datasets_dir/review_datasets/Data_for_Srdjan.xlsx.")
+    data = pd.read_excel("datasets_dir/review_datasets/Data_for_Srdjan.xlsx", sheet_name=1)
     data.columns = [c.strip() for c in data.columns] 
     data.columns = [c.lower() for c in data.columns]
     select = np.isfinite(data['expression in m9'])
